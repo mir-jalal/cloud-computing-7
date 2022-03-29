@@ -8,6 +8,10 @@ def custom_sum(a, b):
     return a + b
 
 
+def split_words(string):
+    return "".join((char if char.isalpha() or char.isnumeric() else " ").lower() for char in string).split()
+
+
 if __name__ == "__main__":
     # Check the number of arguments
     if len(sys.argv) != 2:
@@ -38,7 +42,7 @@ if __name__ == "__main__":
     # Apply RDD operations to compute WordCount
     # lines RDD contains lines from the input files.
     # Lets split the lines into words and use flatMap operation to generate an RDD of words.
-    words = lines.flatMap(lambda line: line.split(' '))
+    words = lines.flatMap(lambda line: split_words(line))
 
     # Transform words into (word, 1) Key & Value tuples
     pairs = words.map(lambda word: (word, 1))
