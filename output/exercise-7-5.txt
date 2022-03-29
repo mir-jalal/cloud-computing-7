@@ -1,0 +1,5 @@
+file:///C:/Users/mirjalal/PycharmProjects/cloud-computing-7/input/pg33742.txt [('the', 2525), ('and', 2145), ('of', 1510), ('in', 1147), ('to', 1018)]
+file:///C:/Users/mirjalal/PycharmProjects/cloud-computing-7/input/pg67507.txt [('the', 7546), ('and', 3573), ('of', 3184), ('to', 2750), ('is', 2476)]
+file:///C:/Users/mirjalal/PycharmProjects/cloud-computing-7/input/pg16237.txt [('de', 2586), ('les', 1634), ('et', 1543), ('la', 1320), ('l', 1146)]
+file:///C:/Users/mirjalal/PycharmProjects/cloud-computing-7/input/pg48075.txt [('und', 1112), ('die', 832), ('der', 679), ('zu', 627), ('in', 474)]
+file:///C:/Users/mirjalal/PycharmProjects/cloud-computing-7/input/pg52536.txt [('ja', 1005), ('hän', 468), ('on', 351), ('oli', 325), ('ei', 234)]

@@ -6,11 +6,17 @@ from pyspark.sql.functions import input_file_name
 # Custom function for computing a sum.
 # Inputs: a and b are values from two different RDD records/tuples.
 def custom_sum(a, b):
-    return a + b
+    return a+b
 
 
 def split_words(string):
     return "".join((char if char.isalpha() or char.isnumeric() else " ").lower() for char in string).split()
+
+
+def top5(records):
+    top5_list = sorted(list(records), key=lambda x: x[1])[-5:]
+    top5_list.reverse()
+    return top5_list
 
 
 if __name__ == "__main__":
@@ -50,7 +56,9 @@ if __name__ == "__main__":
 
     # Apply reduceBy key to group pairs by key/word and apply sum operation on the list of values inside each group
     # Apply our of customSum function as the aggregation function, but we could also have used "lambda x,y: x+y" function
-    counts = pairs.reduceByKey(custom_sum)
+    counts = pairs.reduceByKey(custom_sum).map(lambda filename_word_count: (filename_word_count[0][0],
+                                                   (filename_word_count[0][1], filename_word_count[1])
+                                                   )).groupByKey().mapValues(top5)
 
     # Read the data out of counts RDD
     # Output is a Python list (of (key, value) tuples)
