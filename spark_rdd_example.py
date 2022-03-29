@@ -1,5 +1,6 @@
 import sys
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import input_file_name
 
 
 # Custom function for computing a sum.
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     sc = spark.sparkContext
 
     # Load input RDD from the data folder
-    lines = sc.textFile(input_folder)
+    lines = spark.read.text(input_folder).select(input_file_name(), "value").rdd.map(tuple)
 
     # Take 5 records from the RDD and print them out
     records = lines.take(5)
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     # Apply RDD operations to compute WordCount
     # lines RDD contains lines from the input files.
     # Lets split the lines into words and use flatMap operation to generate an RDD of words.
-    words = lines.flatMap(lambda line: split_words(line))
+    words = lines.flatMapValues(lambda line: split_words(line))
 
     # Transform words into (word, 1) Key & Value tuples
     pairs = words.map(lambda word: (word, 1))
